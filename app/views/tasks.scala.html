@@ -1,0 +1,32 @@
+@(tasks: List[Task], taskForm: Form[String])(implicit request: RequestHeader, messages: Messages)
+<!-- First line defines the function signature, takes in 2 parameters tasks (of datatype List) and taskForm (of datatype Form)-->
+
+@import helper._
+
+@main("Todo list") {
+
+<h1>@tasks.size task(s)</h1>
+
+<ul>
+    @tasks.map { task =>
+    <li>
+        @task.name
+
+        @form(action = CSRF(routes.HomeController.deleteTask(task.taskId))) {
+        <input type="submit" value="Delete">
+        }
+    </li>
+    }
+</ul>
+
+<h2>Add a new task</h2>
+
+@form(routes.HomeController.addTask()) {
+
+@inputText(taskForm("taskName"))
+
+<input type="submit" value="Create">
+
+}
+
+}

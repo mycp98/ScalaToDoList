@@ -1,0 +1,17 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+# An example controller showing a sample home page
+# web server receives GET request for the /...path and must retrieve the Action to execute from the method in the controllers.HomeController...
+GET     /                           controllers.HomeController.index()
+GET     /sum/:firstNum/:secondNum   controllers.HomeController.sumOf2Num(firstNum: Int, secondNum: Int)
+# route to list all tasks, then to handle task creation and deletion:
+GET     /my-tasks                   controllers.HomeController.listOfTasks()
+POST    /delete-task/:id            controllers.HomeController.deleteTask(id: Int)
++ nocsrf
+POST    /create-task                controllers.HomeController.addTask()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
